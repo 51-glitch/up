@@ -43,3 +43,14 @@ For a privacy concern already present in the repository, use the private process
 Explain the problem, evidence/source, changed pages and both languages, privacy/licensing impact, and commands run. Screenshots are useful for layout changes at 375px and 1280px.
 
 By contributing, you agree that content is contributed under CC BY-NC 4.0 and code under MIT according to `LICENSE.md`, unless a file clearly states another compatible license.
+
+## Engineering regressions and size reports
+
+`npm run check` includes `npm run test:engineering`.
+It exercises the real navigation CLI in temporary directories, covering synchronized,
+stale, missing-source and duplicate-link cases. Check mode must preserve input files
+and report refusals through diagnostics and a nonzero exit code.
+
+After building, run `npm run check:bundle -- --json-out /tmp/up-size.json` to save
+raw/gzip sizes, file SHA-256 values, revision and lockfile identity.
+Reports retain budget failures; passing size budgets does not certify load or interaction latency.
